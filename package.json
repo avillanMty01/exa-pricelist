@@ -1,0 +1,16 @@
+{
+  "name": "pricelist",
+  "version": "1.0.0",
+  "description": "My first attempt at pricelist app. 20210924@12:13CDT",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "avillanMty01@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^6.0.7"
+  }
+}
