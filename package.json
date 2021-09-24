@@ -4,13 +4,20 @@
   "description": "My first attempt at pricelist app. 20210924@12:13CDT",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
   },
   "keywords": [],
   "author": "avillanMty01@gmail.com",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
     "mongoose": "^6.0.7"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.13"
   }
 }
