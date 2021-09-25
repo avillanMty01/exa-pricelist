@@ -14,6 +14,8 @@ app.use(express.urlencoded({ extended: false, limit: '10Mb' }))  // also bodyPar
             // place this lines before the routes
 
 const indexRouter = require('./routes/index')
+const categoriesRouter = require('./routes/categories')
+
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -29,5 +31,6 @@ db.once('open', () => console.log('alf: Connected to mongodb'))
 
 
 app.use('/', indexRouter)
+app.use('/categories', categoriesRouter)
 
 app.listen(process.env.PORT || 3000)
