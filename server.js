@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: false, limit: '10Mb' }))  // also bodyPar
 
 const indexRouter = require('./routes/index')
 const categoriesRouter = require('./routes/categories')
+const suppliersRouter = require('./routes/suppliers')
 
 
 app.set('view engine', 'ejs')
@@ -32,5 +33,6 @@ db.once('open', () => console.log('alf: Connected to mongodb'))
 
 app.use('/', indexRouter)
 app.use('/categories', categoriesRouter)
+app.use('/suppliers', suppliersRouter)
 
 app.listen(process.env.PORT || 3000)

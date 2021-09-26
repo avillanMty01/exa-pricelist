@@ -3,8 +3,13 @@ const router = express.Router()
 const Category = require('../models/category')
 
 // All categories route
-router.get('/', (req, res) => {
-    res.render('categories/index')
+router.get('/', async (req, res) => {
+    try {
+        const categories = await Category.find({}).sort({"category": 1})
+        res.render('categories/index', { categories: categories })
+    } catch {
+        res.redirect('/')
+    }
 })
 
 // New category route (for displaying the form)
