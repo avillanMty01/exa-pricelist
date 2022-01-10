@@ -2,7 +2,7 @@
   "name": "pricelist",
   "version": "1.0.0",
   "description": "My first attempt at pricelist app. 20210924@12:13CDT",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "devStart": "nodemon server.js"

@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false, limit: '10Mb' }))  // also bodyPar
 const indexRouter = require('./routes/index')
 const categoriesRouter = require('./routes/categories')
 const suppliersRouter = require('./routes/suppliers')
-
+const productsRouter = require('./routes/products')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -25,7 +25,10 @@ app.use(expressLayouts)
 app.use(express.static('public'))
 
 const mongoose = require('mongoose')
-mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+mongoose.connect(process.env.DATABASE_URL, { 
+    useNewUrlParser: true,
+    autoIndex: true //get error if using UNIQUE in schemas, if not, it will duplicate entries
+ })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('alf: Connected to mongodb'))
@@ -34,5 +37,6 @@ db.once('open', () => console.log('alf: Connected to mongodb'))
 app.use('/', indexRouter)
 app.use('/categories', categoriesRouter)
 app.use('/suppliers', suppliersRouter)
+app.use('/products', productsRouter)
 
 app.listen(process.env.PORT || 3000)
