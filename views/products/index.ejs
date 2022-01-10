@@ -1,5 +1,11 @@
 <h2>Products</h2>
 <br>
+<form action="/products" method="GET">
+    <label>Product</label>
+    <input type="text" name="product" value="<%= searchOptions.product %>">
+    <button type="submit">Search</button>
+</form>
+<br>
 <% products.forEach( product => { %> 
     <div><%= product.product %></div>
     <div><%= product.price %> </div>

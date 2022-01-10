@@ -4,13 +4,21 @@ const Product = require('../models/product')
 
 // All products route
 router.get('/', async (req, res) => {
+    let searchOptions = {}
+    if (req.query.product != null && req.query.product !== '') {
+        searchOptions.product = new RegExp(req.query.product, 'i')
+    }
     try {
-        const products = await Product.find({}).sort({"product": 1})
-        res.render('products/index', { products: products })
+        const products = await Product.find(searchOptions).sort({"product": 1})
+        res.render('products/index', { products: products,
+                                        searchOptions: req.query
+         })
     } catch {
         res.redirect('/')
     }
 })
+
+
 
 // New product route (for displaying the form)
 router.get('/new', (req, res) => {
