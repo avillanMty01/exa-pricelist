@@ -1,6 +1,32 @@
-<label>Product</label>
-<input type="text" name="product" value="<%= product.product %>">
-<br>
+<div></div>
+    <label>Product</label>
+    <input type="text" name="product" value="<%= product.product %>">
+</div>
+<div>
 <label>Price</label>
 <input type="text" name="price" value="<%= product.price %>">
+</div>
+<div>
+<label>Supplier</label>
+<select name="supplier">
+    <% suppliers.forEach(supplier => { %> 
+        <% if (supplier.id === product.supplier) { %> 
+            <option selected label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
+        <% } else { %> 
+            <option label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
+        <% } %> 
+    <% }) %> 
+</select>
+</div>
+<div>
+    <select name="category">
+        <% categories.forEach(category => { %> 
+            <% if (category.id === product.category) { %> 
+                <option selected label="<%= category.category %>" value="<%= category.id %>"></option>
+            <% } else { %> 
+                <option label="<%= category.category %>" value="<%= category.id %>"></option>
+            <% } %> 
+        <% }) %> 
+    </select>
+</div>
 <br>

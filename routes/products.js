@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const Product = require('../models/product')
+const Supplier = require('../models/supplier')
+const Category = require('../models/category')
 
 // All products route
 router.get('/', async (req, res) => {
@@ -21,8 +23,19 @@ router.get('/', async (req, res) => {
 
 
 // New product route (for displaying the form)
-router.get('/new', (req, res) => {
-    res.render('products/new', { product: new Product() })
+router.get('/new', async (req, res) => {
+    try {
+        const suppliers = await Supplier.find({}).sort({supplier: 1})
+        const categories = await Category.find({}).sort({category: 1})
+        const product = new Product()
+        res.render('products/new', {
+            product: product,
+            suppliers: suppliers,
+            categories: categories
+        })
+    } catch {
+        res.redirect('/products')
+    }
 })
 
 // Create (Saving) the new product (post)
@@ -30,7 +43,9 @@ router.post('/', async (req, res) => {
     //we go one by one field to make sure we save what we want
     const product = new Product({
         product: req.body.product,
-        price: req.body.price
+        price: req.body.price,
+        supplier: req.body.supplier,
+        category: req.body.category
     })
     try {
         const newProduct = await product.save()
@@ -40,6 +55,7 @@ router.post('/', async (req, res) => {
         res.render('products/new', {
             product: product.product,
             price: product.price,
+            category: product.category,
             errorMessage: 'Error saving product'
         })
     }    
