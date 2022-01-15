@@ -1,22 +1,22 @@
-<div></div>
+<div>
     <label>Product</label>
     <input type="text" name="product" value="<%= product.product %>">
 </div>
 <div>
-<label>Price</label>
-<input type="text" name="price" value="<%= product.price %>">
+    <label>Price</label>
+    <input type="text" name="price" value="<%= product.price %>">
 </div>
 <div>
-<label>Supplier</label>
-<select name="supplier">
-    <% suppliers.forEach(supplier => { %> 
-        <% if (supplier.id === product.supplier) { %> 
-            <option selected label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
-        <% } else { %> 
-            <option label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
-        <% } %> 
-    <% }) %> 
-</select>
+    <label>Supplier</label>
+    <select name="supplier">
+        <% suppliers.forEach(supplier => { %> 
+            <% if (supplier.id === product.supplier) { %> 
+                <option selected label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
+            <% } else { %> 
+                <option label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
+            <% } %> 
+        <% }) %> 
+    </select>
 </div>
 <div>
     <select name="category">
@@ -29,4 +29,11 @@
         <% }) %> 
     </select>
 </div>
-<br>
+<div>
+    <label>Comments</label>
+    <textarea name="comments"><%= product.comments %></textarea>
+</div>
+<div>
+    <label>Product image</label>
+    <input type="file" name="productImageFile">
+</div>

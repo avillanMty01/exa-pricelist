@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const productImageBasePath = 'uploads/productImages'
 
 //create a schema
 const productSchema = new mongoose.Schema({
@@ -17,7 +18,14 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Category'
-    }
+    },
+    productImageFile: {
+        type: String
+    },
+    comments: {
+        type: String
+    },
 })
 
 module.exports = mongoose.model('Product', productSchema)
+module.exports.productImageBasePath = productImageBasePath
