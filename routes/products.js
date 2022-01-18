@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const multer = require('multer')
 const path = require('path')
+const fs = require('fs')
 const Product = require('../models/product')
 const Supplier = require('../models/supplier')
 const Category = require('../models/category')
@@ -58,9 +59,19 @@ router.post('/', upload.single('productImageFile'), async (req, res) => {
         res.redirect(`products`)
     } catch (err) {
         console.error(err)
+        //delete uploaded image here on error
+        if (product.productImageFile != null) {
+            removeProductImage(product.productImageFile)
+        }
         renderNewPage(res, product, true)
     }    
 })
+
+function removeProductImage(fileName) {
+    fs.unlink(path.join(uploadPath, fileName), err => {
+        if (err) console.error(err)
+    })
+}
 
 async function renderNewPage(res, product, hasError = false) {
     try {
