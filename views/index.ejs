@@ -1,1 +1,22 @@
-Middle part 
+<h2>Latest Products</h2>
+<div>
+<form action="/" method="GET">
+    <div>
+        <label>SKU (internal code)</label>
+        <input type="number" name="sku" value="<%= searchOptions.sku %>">
+    </div>
+    <div>
+        <button type="submit">Search</button>
+    </div>
+</form>
+<div>
+<% products.forEach( product => { %> 
+    <div><b><%= product.sku %></b></div>
+    <div><b><%= product.product %></b></div>
+    <div><%= product.price %></div>
+    <div><%= product.category %></div>
+    <% if (product.productImagePath != null && product.productImagePath !== '') { %>
+        <div><img height="150" width="100" src="<%= product.productImagePath %>"></div>
+    <% } %>
+    <br>
+<% }) %> 

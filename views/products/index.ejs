@@ -1,15 +1,26 @@
 <h2>Products</h2>
 <br>
 <form action="/products" method="GET">
-    <label>Product</label>
-    <input type="text" name="product" value="<%= searchOptions.product %>">
-    <button type="submit">Search</button>
+    <div>
+        <label>SKU (internal code)</label>
+        <input type="number" name="sku" value="<%= searchOptions.sku %>">
+    </div>
+    <div>
+        <label>Product</label>
+        <input type="text" name="product" value="<%= searchOptions.product %>">
+    </div>
+    <div>
+        <button type="submit">Search</button>
+    </div>
 </form>
 <br>
 <% products.forEach( product => { %> 
+    <div><b><%= product.sku %></b></div>
     <div><b><%= product.product %></b></div>
     <div><%= product.price %></div>
     <div><%= product.category %></div>
-    <div><%= product.productImage %></div>
+    <% if (product.productImagePath != null && product.productImagePath !== '') { %>
+        <div><img height="150" width="100" src="<%= product.productImagePath %>"></div>
+    <% } %>
     <br>
 <% }) %> 

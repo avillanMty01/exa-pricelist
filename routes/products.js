@@ -20,16 +20,22 @@ const upload = multer({
 
 // All products route
 router.get('/', async (req, res) => {
-    let searchOptions = {}
+    let query = Product.find().sort({'sku': 1})
+    //let searchOptions = {}
+    if (req.query.sku != null && req.query.sku !== '') {
+        query = query.find({'sku': req.query.sku})
+    }
     if (req.query.product != null && req.query.product !== '') {
-        searchOptions.product = new RegExp(req.query.product, 'i')
+        query = query.regex('product', new RegExp(req.query.product, 'i'))
     }
     try {
-        const products = await Product.find(searchOptions).sort({"product": 1})
+        //const products = await Product.find(searchOptions).sort({"sku": 1})
+        const products = await query.exec()
         res.render('products/index', { products: products,
                                         searchOptions: req.query
          })
-    } catch {
+    } catch (err) {
+        console.error(err)
         res.redirect('/')
     }
 })
@@ -46,6 +52,7 @@ router.post('/', upload.single('productImageFile'), async (req, res) => {
     //we go one by one field to make sure we save what we want
     const fileName = req.file != null ? req.file.filename : null
     const product = new Product({
+        sku: req.body.sku,
         product: req.body.product,
         price: req.body.price,
         supplier: req.body.supplier,
