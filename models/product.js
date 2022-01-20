@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const path = require('path')
-const productImageBasePath = 'uploads/productImages'
 
 //create a schema
 const productSchema = new mongoose.Schema({
@@ -23,7 +21,10 @@ const productSchema = new mongoose.Schema({
         required: true,
         ref: 'Category'
     },
-    productImageFile: {
+    productImage: {
+        type: Buffer
+    },
+    productImageType: {
         type: String
     },
     comments: {
@@ -31,11 +32,13 @@ const productSchema = new mongoose.Schema({
     },
 })
 
-productSchema.virtual('productImagePath').get(function() {
-    if (this.productImageFile != null) {
-        return path.join('/', productImageBasePath, this.productImageFile)
+
+// virtual property, not actual in MongoDB
+// we use normal function to have access to 'this.'
+productSchema.virtual('productImageFile').get(function() {
+    if (this.productImage != null && this.productImageType != null) {
+        return `data:${this.productImageType};charset=utf-8;base64,${this.productImage.toString('base64')}`
     }
 })
 
 module.exports = mongoose.model('Product', productSchema)
-module.exports.productImageBasePath = productImageBasePath

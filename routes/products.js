@@ -1,21 +1,10 @@
 const express = require('express')
 const router = express.Router()
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
 const Product = require('../models/product')
 const Supplier = require('../models/supplier')
 const Category = require('../models/category')
 const req = require('express/lib/request')
-const uploadPath = path.join('public', Product.productImageBasePath)
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
-
-const upload = multer({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype))
-    }
-})
 
 
 // All products route
@@ -48,37 +37,27 @@ router.get('/new', async (req, res) => {
 })
 
 // Create (Saving) the new product (post)
-router.post('/', upload.single('productImageFile'), async (req, res) => {
+router.post('/', async (req, res) => {
     //we go one by one field to make sure we save what we want
-    const fileName = req.file != null ? req.file.filename : null
     const product = new Product({
         sku: req.body.sku,
         product: req.body.product,
         price: req.body.price,
         supplier: req.body.supplier,
         category: req.body.category,
-        productImageFile: fileName,
         comments: req.body.comments
     })
+    saveProductImage(product, req.body.productImageFile)
+
     try {
         const newProduct = await product.save()
         // res.redirect(`categories/${newCategory.id}`)
         res.redirect(`products`)
     } catch (err) {
         console.error(err)
-        //delete uploaded image here on error
-        if (product.productImageFile != null) {
-            removeProductImage(product.productImageFile)
-        }
         renderNewPage(res, product, true)
     }    
 })
-
-function removeProductImage(fileName) {
-    fs.unlink(path.join(uploadPath, fileName), err => {
-        if (err) console.error(err)
-    })
-}
 
 async function renderNewPage(res, product, hasError = false) {
     try {
@@ -97,5 +76,13 @@ async function renderNewPage(res, product, hasError = false) {
     }
 }
 
+function saveProductImage(product, imageEncoded) {
+    if (imageEncoded == null) return
+    const image = JSON.parse(imageEncoded)
+    if (image != null && imageMimeTypes.includes(image.type)) {
+        product.productImage = new Buffer.from(image.data, 'base64')
+        product.productImageType = image.type
+    }
+}
 
 module.exports = router

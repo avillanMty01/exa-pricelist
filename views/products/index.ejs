@@ -19,8 +19,8 @@
     <div><b><%= product.product %></b></div>
     <div><%= product.price %></div>
     <div><%= product.category %></div>
-    <% if (product.productImagePath != null && product.productImagePath !== '') { %>
-        <div><img height="150" width="100" src="<%= product.productImagePath %>"></div>
+    <% if (product.productImageFile != null && product.productImageFile !== '') { %>
+        <div><img height="150" width="100" src="<%= product.productImageFile %>"></div>
     <% } %>
     <br>
 <% }) %> 
