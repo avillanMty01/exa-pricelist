@@ -17,11 +17,13 @@ const indexRouter = require('./routes/index')
 const categoriesRouter = require('./routes/categories')
 const suppliersRouter = require('./routes/suppliers')
 const productsRouter = require('./routes/products')
+const methodOverride = require('method-override')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
 app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
+app.use(methodOverride('_method'))
 app.use(express.static('public'))
 
 const mongoose = require('mongoose')

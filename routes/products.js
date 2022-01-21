@@ -85,4 +85,36 @@ function saveProductImage(product, imageEncoded) {
     }
 }
 
+//-----------------------------final routes for CRUD
+// OPEN a Product
+router.get('/:id', (req, res) => {
+    res.send('Show Product ' + req.params.id)
+})
+
+// EDIT a Product
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id)
+        res.render('products/edit', { product: product })
+    } catch {
+        res.redirect('/products')
+    }
+})
+
+
+// browsers only do get  post
+// we install a different library to use put and delete requests
+//method-override
+
+// UPDATE a product (save changes)
+router.put('/:id', (req, res) => {
+    res.send('Update Product ' + req.params.id)
+})
+
+// DELETE a Product
+router.delete('/:id', (req, res) => {
+    res.send('Delete Product ' + req.params.id)
+})
+
+
 module.exports = router

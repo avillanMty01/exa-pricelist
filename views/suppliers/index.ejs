@@ -7,5 +7,7 @@
 <br>
 <% suppliers.forEach( supplier => { %> 
     <div><%= supplier.supplier %></div>
-    <br>
+    <a href="/suppliers/<%= supplier.id %>">View</a>
+    <a href="/suppliers/<%= supplier.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', { url: `/suppliers/${supplier.id}` }) %>
 <% }) %> 

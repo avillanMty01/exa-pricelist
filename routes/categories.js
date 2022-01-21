@@ -43,4 +43,35 @@ router.post('/', async (req, res) => {
     }    
 })
 
+//-----------------------------final routes for CRUD
+// OPEN a category
+router.get('/:id', (req, res) => {
+    res.send('Show Category ' + req.params.id)
+})
+
+// EDIT a category
+router.get('/:id/edit', async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.id)
+        res.render('categories/edit', { category: category })
+    } catch {
+        res.redirect('/categories')
+    }
+})
+
+
+// browsers only do get  post
+// we install a different library to use put and delete requests
+//method-override
+
+// UPDATE a category (save changes)
+router.put('/:id', (req, res) => {
+    res.send('Update Category ' + req.params.id)
+})
+
+// DELETE a category
+router.delete('/:id', (req, res) => {
+    res.send('Delete Category ' + req.params.id)
+})
+
 module.exports = router
