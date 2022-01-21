@@ -1,7 +1,8 @@
 FilePond.registerPlugin(
     FilePondPluginImagePreview,
     FilePondPluginImageResize,
-    FilePondPluginFileEncode
+    FilePondPluginFileEncode,
+    FilePondPluginImageTransform
 );
 
 FilePond.setOptions({
