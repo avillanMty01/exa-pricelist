@@ -65,8 +65,26 @@ router.get('/:id/edit', async (req, res) => {
 //method-override
 
 // UPDATE a category (save changes)
-router.put('/:id', (req, res) => {
-    res.send('Update Category ' + req.params.id)
+router.put('/:id', async (req, res) => {
+   //we go one by one field to make sure we save what we want
+    let category
+    try {
+        category = await Category.findById(req.params.id)
+        category.category = req.body.category
+        category.c_ClaveProdServ = req.body.c_ClaveProdServ
+        await category.save()
+        res.redirect(`/categories/${category.id}`)
+        } catch (err) {
+            console.error(err)
+            if (category == null) {
+                res.redirect('/')
+            } else {
+                res.render('categories/edit', {
+                    category: category,
+                    errorMessage: 'Error updating Category'
+                })
+            }
+        }
 })
 
 // DELETE a category

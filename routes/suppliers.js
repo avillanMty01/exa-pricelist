@@ -34,8 +34,7 @@ router.post('/', async (req, res) => {
     })
     try {
         const newSupplier = await supplier.save()
-        // res.redirect(`suppliers/${newSupplier.id}`)
-        res.redirect(`suppliers`)
+        res.redirect(`suppliers/${newSupplier.id}`)
     } catch {
         res.render('suppliers/new', {
             supplier: supplier.supplier,
@@ -54,7 +53,7 @@ router.get('/:id', (req, res) => {
     res.send('Show supplier ' + req.params.id)
 })
 
-// EDIT a category
+// EDIT a supplier
 router.get('/:id/edit', async (req, res) => {
     try {
         const supplier = await Supplier.findById(req.params.id)
@@ -70,8 +69,25 @@ router.get('/:id/edit', async (req, res) => {
 //method-override
 
 // UPDATE a supplier (save changes)
-router.put('/:id', (req, res) => {
-    res.send('Update Supplier ' + req.params.id)
+router.put('/:id', async (req, res) => {
+    let supplier
+    try {
+        supplier = await Supplier.findById(req.params.id)
+            supplier.supplier = req.body.supplier
+            supplier.supStatus = req.body.supStatus
+        await supplier.save()
+        res.redirect(`/suppliers/${supplier.id}`)
+        } catch (err) {
+            console.error(err)
+            if (supplier == null) {
+                res.redirect('/')
+            } else {
+                res.render('suppliers/edit', {
+                    supplier: supplier,
+                    errorMessage: 'Error updating Supplier'
+                })
+            }
+        } 
 })
 
 // DELETE a supplier
