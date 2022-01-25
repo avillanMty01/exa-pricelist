@@ -31,7 +31,8 @@ router.post('/', async (req, res) => {
         const newCategory = await category.save()
         // res.redirect(`categories/${newCategory.id}`)
         res.redirect(`categories`)
-    } catch {
+    } catch (err) {
+        console.error(err) // DEBUG
         res.render('categories/new', {
             category: category.category,
             c_ClaveProdServ: category.c_ClaveProdServ,
@@ -88,8 +89,19 @@ router.put('/:id', async (req, res) => {
 })
 
 // DELETE a category
-router.delete('/:id', (req, res) => {
-    res.send('Delete Category ' + req.params.id)
+router.delete('/:id', async (req, res) => {
+    let category
+    try {
+        category = await Category.findById(req.params.id)
+        await category.remove()
+        res.redirect('/categories')
+    } catch {
+        if (category == null) {
+            res.redirect('/')
+        } else {
+            res.redirect(`/categories/${category.id}`)
+            }
+    }
 })
 
 module.exports = router

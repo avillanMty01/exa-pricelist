@@ -91,8 +91,19 @@ router.put('/:id', async (req, res) => {
 })
 
 // DELETE a supplier
-router.delete('/:id', (req, res) => {
-    res.send('Delete supplier ' + req.params.id)
+router.delete('/:id', async (req, res) => {
+    let supplier
+    try {
+        supplier = await Supplier.findById(req.params.id)
+        await supplier.remove()
+        res.redirect('/suppliers')
+    } catch {
+        if (supplier == null) {
+            res.redirect('/')
+        } else {
+            res.redirect(`/suppliers/${supplier.id}`)
+            }
+    }
 })
 
 

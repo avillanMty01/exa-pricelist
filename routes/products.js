@@ -112,8 +112,19 @@ router.put('/:id', (req, res) => {
 })
 
 // DELETE a Product
-router.delete('/:id', (req, res) => {
-    res.send('Delete Product ' + req.params.id)
+router.delete('/:id', async (req, res) => {
+    let product
+    try {
+        product = await Product.findById(req.params.id)
+        await product.remove()
+        res.redirect('/products')
+    } catch {
+        if (product == null) {
+            res.redirect('/')
+        } else {
+            res.redirect(`/products/${product.id}`)
+            }
+    }
 })
 
 
