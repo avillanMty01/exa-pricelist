@@ -1,0 +1,11 @@
+<h2>Category: <%= category.category %> </h2>
+
+    <label>c_ClaveProdServ *: <%= category.c_ClaveProdServ %></label>
+    <br>
+    <label>catStatus: <%= category.catStatus %></label>
+    <br>
+    <label>createdBy: <%= category.createdBy %></label>
+<div>
+    <a href="/categories/<%= category.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', { url: `/categories/${category.id}` }) %>
+</div>

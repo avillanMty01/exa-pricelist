@@ -13,8 +13,8 @@
 <div>
     <label>Supplier</label>
     <select name="supplier">
-        <% suppliers.forEach(supplier => { %> 
-            <% if (supplier.id === product.supplier) { %> 
+        <% suppliers.forEach(supplier => { %>
+            <% if (supplier.id == product.supplier) { %> 
                 <option selected label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
             <% } else { %> 
                 <option label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
@@ -25,7 +25,7 @@
 <div>
     <select name="category">
         <% categories.forEach(category => { %> 
-            <% if (category.id === product.category) { %> 
+            <% if (category.id == product.category) { %> 
                 <option selected label="<%= category.category %>" value="<%= category.id %>"></option>
             <% } else { %> 
                 <option label="<%= category.category %>" value="<%= category.id %>"></option>

@@ -9,6 +9,7 @@ const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif']
 
 // All products route
 router.get('/', async (req, res) => {
+    //let query = Product.find().collation({locale: "en" }).sort({'sku': 1})
     let query = Product.find().sort({'sku': 1})
     //let searchOptions = {}
     if (req.query.sku != null && req.query.sku !== '') {
@@ -94,9 +95,12 @@ router.get('/:id', (req, res) => {
 // EDIT a Product
 router.get('/:id/edit', async (req, res) => {
     try {
+        const suppliers = await Supplier.find({}).sort({supplier: 1})
+        const categories = await Category.find({}).sort({category: 1})
         const product = await Product.findById(req.params.id)
-        res.render('products/edit', { product: product })
-    } catch {
+        res.render('products/edit', { product: product, suppliers: suppliers, categories: categories })
+    } catch (err) {
+        console.error(err)
         res.redirect('/products')
     }
 })

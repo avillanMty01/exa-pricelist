@@ -46,8 +46,13 @@ router.post('/', async (req, res) => {
 
 //-----------------------------final routes for CRUD
 // OPEN a category
-router.get('/:id', (req, res) => {
-    res.send('Show Category ' + req.params.id)
+router.get('/:id', async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.id)
+        res.render('categories/show', { category: category })
+    } catch {
+        res.redirect('/categories')
+    }
 })
 
 // EDIT a category
