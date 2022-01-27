@@ -48,8 +48,10 @@ router.post('/', async (req, res) => {
         category: req.body.category,
         comments: req.body.comments
     })
-    saveProductImage(product, req.body.productImageFile)
-
+    if (req.body.productImageFile != null && req.body.productImageFile != '') {
+        saveProductImage(product, req.body.productImageFile)
+    }
+    
     try {
         const newProduct = await product.save()
         // res.redirect(`categories/${newCategory.id}`)
@@ -88,8 +90,13 @@ function saveProductImage(product, imageEncoded) {
 
 //-----------------------------final routes for CRUD
 // OPEN a Product
-router.get('/:id', (req, res) => {
-    res.send('Show Product ' + req.params.id)
+router.get('/:id', async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.id)
+        res.render('products/show', { product: product })
+    } catch {
+        res.redirect('/products')
+    }
 })
 
 // EDIT a Product
@@ -111,8 +118,38 @@ router.get('/:id/edit', async (req, res) => {
 //method-override
 
 // UPDATE a product (save changes)
-router.put('/:id', (req, res) => {
-    res.send('Update Product ' + req.params.id)
+router.put('/:id', async (req, res) => {
+    let product
+    const suppliers = await Supplier.find({}).sort({supplier: 1})
+    const categories = await Category.find({}).sort({category: 1})
+    try {
+        product = await Product.findById(req.params.id)
+            product.sku = req.body.sku
+            product.product = req.body.product
+            product.price = req.body.price
+            product.supplier = req.body.supplier
+            product.category = req.body.category
+            product.comments = req.body.comments
+            
+        if (req.body.productImageFile != null && req.body.productImageFile != '') {
+            saveProductImage(product, req.body.productImageFile)
+        }
+            
+        await product.save()
+        res.redirect(`/products/${product.id}`)
+        } catch (err) {
+            console.error(err)
+            if (product == null) {
+                res.redirect('/')
+            } else {
+                res.render('products/edit', {
+                    product: product,
+                    suppliers: suppliers,
+                    categories: categories,
+                    errorMessage: 'Error updating Product'
+                })
+            }
+        } 
 })
 
 // DELETE a Product

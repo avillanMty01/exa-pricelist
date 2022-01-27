@@ -1,0 +1,19 @@
+<h2><%= product.sku %> - <%= product.product %> </h2>
+<div>
+price: <%= product.price %>
+<br>
+supStatus: <%= product.supplier %>
+<br>
+createdBy: <%= product.category %>
+<br>
+comments: <%= product.comments %>
+</div>
+
+<% if (product.productImageFile != null && product.productImageFile !== '') { %>
+    <div><img height="150" width="100" src="<%= product.productImageFile %>"></div>
+<% } %>
+
+<div>
+    <a href="/products/<%= product.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', { url: `/products/${product.id}` }) %>
+</div>

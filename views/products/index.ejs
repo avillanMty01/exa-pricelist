@@ -17,13 +17,11 @@
 <br>
 <% products.forEach( product => { %> 
     <div><b><%= product.sku %></b></div>
-    <div><b><%= product.product %></b></div>
+    <div><a href="/products/<%= product.id %>"><b><%= product.product %></b></a></div>
     <div><%= product.price %></div>
     <div><%= product.category %></div>
     <% if (product.productImageFile != null && product.productImageFile !== '') { %>
         <div><img height="150" width="100" src="<%= product.productImageFile %>"></div>
     <% } %>
-    <a href="/products/<%= product.id %>">View</a>
-    <a href="/products/<%= product.id %>/edit">Edit</a>
-    <%- include('../partials/deleteForm', { url: `/products/${product.id}` }) %>
+    
 <% }) %> 

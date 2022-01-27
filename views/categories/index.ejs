@@ -2,9 +2,6 @@
 <a href="/categories/new">Add category</a>
 <br>
 <% categories.forEach( category => { %> 
-    <div><%= category.category %></div>
+    <div><a href="/categories/<%= category.id %>"><%= category.category %></a></div>
     <div><%= category.c_ClaveProdServ %> </div>
-    <a href="/categories/<%= category.id %>">View</a>
-    <a href="/categories/<%= category.id %>/edit">Edit</a>
-    <%- include('../partials/deleteForm', { url: `/categories/${category.id}` }) %>
 <% }) %> 

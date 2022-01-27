@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
     }
     try {
         //const products = await Product.find(searchOptions).sort({"sku": 1})
-        const products = await query.limit(10).exec()
+        const products = await query.limit(10).sort({'sku': -1}).exec()
         res.render('index', { products: products,
                                         searchOptions: req.query
          })

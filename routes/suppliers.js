@@ -49,8 +49,13 @@ router.post('/', async (req, res) => {
 
 //-----------------------------final routes for CRUD
 // OPEN a supplier
-router.get('/:id', (req, res) => {
-    res.send('Show supplier ' + req.params.id)
+router.get('/:id', async (req, res) => {
+    try {
+        const supplier = await Supplier.findById(req.params.id)
+        res.render('suppliers/show', { supplier: supplier })
+    } catch {
+        res.redirect('/suppliers')
+    }
 })
 
 // EDIT a supplier
