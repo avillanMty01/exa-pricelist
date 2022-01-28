@@ -18,14 +18,15 @@ router.get('/', async (req, res) => {
     if (req.query.product != null && req.query.product !== '') {
         query = query.regex('product', new RegExp(req.query.product, 'i'))
     }
+    query = query.populate('category').populate('supplier')
+    
     try {
         //const products = await Product.find(searchOptions).sort({"sku": 1})
         const products = await query.exec()
         res.render('products/index', { products: products,
                                         searchOptions: req.query
          })
-    } catch (err) {
-        console.error(err)
+    } catch  {
         res.redirect('/')
     }
 })
@@ -56,8 +57,7 @@ router.post('/', async (req, res) => {
         const newProduct = await product.save()
         // res.redirect(`categories/${newCategory.id}`)
         res.redirect(`products`)
-    } catch (err) {
-        console.error(err)
+    } catch {
         renderNewPage(res, product, true)
     }    
 })
@@ -73,8 +73,7 @@ async function renderNewPage(res, product, hasError = false) {
         }
         if (hasError) params.errorMessage = 'Error saving product'
         res.render('products/new', params)
-    } catch (err){
-        console.error(err)  // DEBUG LINE
+    } catch {
         res.redirect('/products')
     }
 }
@@ -93,6 +92,9 @@ function saveProductImage(product, imageEncoded) {
 router.get('/:id', async (req, res) => {
     try {
         const product = await Product.findById(req.params.id)
+                        .populate('category')
+                        .populate('supplier')
+                        .exec()
         res.render('products/show', { product: product })
     } catch {
         res.redirect('/products')
@@ -106,8 +108,7 @@ router.get('/:id/edit', async (req, res) => {
         const categories = await Category.find({}).sort({category: 1})
         const product = await Product.findById(req.params.id)
         res.render('products/edit', { product: product, suppliers: suppliers, categories: categories })
-    } catch (err) {
-        console.error(err)
+    } catch  {
         res.redirect('/products')
     }
 })
@@ -137,8 +138,7 @@ router.put('/:id', async (req, res) => {
             
         await product.save()
         res.redirect(`/products/${product.id}`)
-        } catch (err) {
-            console.error(err)
+        } catch {
             if (product == null) {
                 res.redirect('/')
             } else {
