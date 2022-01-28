@@ -1,4 +1,4 @@
-<h2>Supplier: <%= supplier.supplier %> </h2>
+<h2 class="page-header">Supplier: <%= supplier.supplier %> </h2>
 <div>
 docType: <%= supplier.docType %>
 <br>
@@ -6,7 +6,7 @@ supStatus: <%= supplier.supStatus %>
 <br>
 createdBy: <%= supplier.createdBy %>
 </div>
-<div>
-    <a href="/suppliers/<%= supplier.id %>/edit">Edit</a>
+<div class="btn-row">
+    <a class="btn btn-primary" href="/suppliers/<%= supplier.id %>/edit">Edit</a>
     <%- include('../partials/deleteForm', { url: `/suppliers/${supplier.id}` }) %>
 </div>

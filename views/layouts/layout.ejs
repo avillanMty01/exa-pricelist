@@ -12,14 +12,17 @@
     <script defer src="https://unpkg.com/filepond-plugin-image-transform/dist/filepond-plugin-image-transform.js"></script>
     <script defer src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
     <script defer src="/javascripts/fileUpload.js"></script>
+    <link rel="stylesheet" href="/stylesheets/main.css">
     <title>EXA Price List</title>
 </head>
 <body>
-    <%- include('../partials/header.ejs') %> 
-    <%- include('../partials/errorMessage.ejs') %> 
-    <%- body %> 
-    <br>
-    after
+    <div class="container">
+        <%- include('../partials/header.ejs') %> 
+        <div class="inner-container">
+            <%- include('../partials/errorMessage.ejs') %> 
+            <%- body %> 
+        </div>
+    </div>
 </body>
 </html>
 <!-- This is the HOMEPAGE for the app, the initial skeleton -->
