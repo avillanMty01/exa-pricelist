@@ -1,12 +1,17 @@
-<label>Supplier</label>
-<input type="text" name="supplier" value="<%= supplier.supplier %>">
-<br>
-<label>docType</label>
-<input type="text" name="docType" value="<%= supplier.docType %>">
-<br>
-<label>supStatus</label>
-<input type="text" name="supStatus" value="<%= supplier.supStatus %>">
-<br>
-<label>createdBy</label>
-<input type="text" name="createdBy" value="<%= supplier.createdBy %>">
-<br>
+<div class="form-row">
+    <div class="form-item">
+        <label>Supplier</label>
+        <input type="text" name="supplier" value="<%= supplier.supplier %>">
+    </div>
+</div>
+    <div class="form-row form-row-end">
+        <div class="form-item">
+            <label>supStatus <%= supplier.supStatus %></label>
+        </div>
+        <div class="form-item">
+            <label>createdBy <%= supplier.createdBy %></label>
+        </div>
+        <input type="hidden" name="supStatus" value="<%= supplier.supStatus %>" readonly>
+        <input type="hidden" name="docType" value="<%= supplier.docType %>" readonly>
+        <input type="hidden" name="createdBy" value="<%= supplier.createdBy %>" readonly>
+    </div>

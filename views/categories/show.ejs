@@ -1,6 +1,6 @@
-<div class="btn-row">
-    <a class="btn btn-primary" href="/categories/<%= category.id %>/edit">Edit</a>
-    <%- include('../partials/deleteForm', { url: `/categories/${category.id}` }) %>
+<div class="form-row form-row-end btn-row">
+        <a class="btn btn-primary" href="/categories/<%= category.id %>/edit">Edit</a>
+        <%- include('../partials/deleteForm', { url: `/categories/${category.id}` }) %>
 </div>
 
 <h2  class="page-header">Category: <%= category.category %> </h2>

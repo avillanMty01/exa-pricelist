@@ -1,11 +1,11 @@
-<div  class="btn-row">
+<div class="form-row form-row-end btn-row">
     <a class="btn btn-primary" href="/products/<%= product.id %>/edit">Edit</a>
     <%- include('../partials/deleteForm', { url: `/products/${product.id}` }) %>
 </div>
 
 <h2 class="page-header"><%= product.sku %> - <%= product.product %> </h2>
 <div>
-price: <%= product.price %>
+price: <%= new Intl.NumberFormat('en-US',  { style: 'currency', currency: 'USD' }).format(product.price) %>
 <br>
 suplier: <%= product.supplier.supplier %>
 <br>

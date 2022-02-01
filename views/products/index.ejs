@@ -1,18 +1,28 @@
 <div class="btn-row"></div>
     <form action="/products" method="GET">
-        <a class="btn btn-primary"  href="/products/new">Add product</a>
-            <label>SKU (internal code)</label>
-            <input type="number" name="sku" value="<%= searchOptions.sku %>">
-            <label>Product</label>
-            <input type="text" name="product" value="<%= searchOptions.product %>">
-            <button class="btn btn-primary" type="submit">Search</button>
+        <div class="form-row form-row-end">
+            <a class="btn btn-primary"  href="/products/new">Add product</a>
+        </div>
+            <div class="form-row form-row-end">
+                <div class="form-item"></div>
+                <div class="form-item">
+                    <label>SKU (internal code)</label>
+                    <input type="number" name="sku" value="<%= searchOptions.sku %>">
+                </div>
+                <div class="form-item">
+                    <label>Product</label>
+                    <input type="text" name="product" value="<%= searchOptions.product %>">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 <h2 class="page-header">Products</h2>
 <% products.forEach( product => { %> 
     <div><b><%= product.sku %></b></div>
     <div><a href="/products/<%= product.id %>"><b><%= product.product %></b></a></div>
-    <div><%= product.price %></div>
+    <div><%= new Intl.NumberFormat('en-US',  { style: 'currency', currency: 'USD' }).format(product.price) %></div>
     <div><%= product.category.category %></div>
     <div><%= product.supplier.supplier %></div>
     <% if (product.productImageFile != null && product.productImageFile !== '') { %>

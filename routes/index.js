@@ -7,11 +7,14 @@ router.get('/', async (req, res) => {
     let query = Product.find()
     //let searchOptions = {}
     if (req.query.sku != null && req.query.sku !== '') {
-        query = query.find({'sku': req.query.sku}).sort({'sku': 1})
+        query = query.find({'sku': req.query.sku})
     }
     try {
         //const products = await Product.find(searchOptions).sort({"sku": 1})
-        const products = await query.limit(10).sort({'sku': -1}).exec()
+        const products = await query.limit(10).sort({'sku': -1})
+            .populate('category')
+            .populate('supplier')
+            .exec()
         res.render('index', { products: products,
                                         searchOptions: req.query
          })

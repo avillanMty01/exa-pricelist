@@ -1,43 +1,53 @@
-<div>
-    <label>SKU (internal code)</label>
-    <input type="number" min="1" name="sku" value="<%= product.sku %>">
+<div class="form-row">
+    <div class="form-item">
+        <label>SKU (internal code)</label>
+        <input type="number" min="1" name="sku" value="<%= product.sku %>">
+    </div>
+    <div class="form-item">
+        <label>Product</label>
+        <input type="text" name="product" value="<%= product.product %>">
+    </div>
 </div>
-<div>
-    <label>Product</label>
-    <input type="text" name="product" value="<%= product.product %>">
+<div class="form-row">
+    <div class="form-item">
+        <label>Price</label>
+        <input type="text" name="price" value="<%= product.price %>">
+    </div>
+    <div class="form-item">
+        <label>Supplier</label>
+        <select name="supplier">
+            <% suppliers.forEach(supplier => { %>
+                <% if (supplier.id == product.supplier) { %> 
+                    <option selected label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
+                <% } else { %> 
+                    <option label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
+                <% } %> 
+            <% }) %> 
+        </select>
+    </div>
 </div>
-<div>
-    <label>Price</label>
-    <input type="text" name="price" value="<%= product.price %>">
+<div class="form-row">
+    <div class="form-item">
+        <label>Category</label>
+        <select name="category">
+            <% categories.forEach(category => { %> 
+                <% if (category.id == product.category) { %> 
+                    <option selected label="<%= category.category %>" value="<%= category.id %>"></option>
+                <% } else { %> 
+                    <option label="<%= category.category %>" value="<%= category.id %>"></option>
+                <% } %> 
+            <% }) %> 
+        </select>
+    </div>
+
 </div>
-<div>
-    <label>Supplier</label>
-    <select name="supplier">
-        <% suppliers.forEach(supplier => { %>
-            <% if (supplier.id == product.supplier) { %> 
-                <option selected label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
-            <% } else { %> 
-                <option label="<%= supplier.supplier %>" value="<%= supplier.id %>"></option>
-            <% } %> 
-        <% }) %> 
-    </select>
-</div>
-<div>
-    <select name="category">
-        <% categories.forEach(category => { %> 
-            <% if (category.id == product.category) { %> 
-                <option selected label="<%= category.category %>" value="<%= category.id %>"></option>
-            <% } else { %> 
-                <option label="<%= category.category %>" value="<%= category.id %>"></option>
-            <% } %> 
-        <% }) %> 
-    </select>
-</div>
-<div>
-    <label>Comments</label>
-    <textarea name="comments"><%= product.comments %></textarea>
-</div>
-<div>
-    <label>Product image</label>
-    <input type="file" name="productImageFile" class="filepond">
+<div class="form-row">
+    <div class="form-item">
+        <label>Comments</label>
+        <textarea name="comments"><%= product.comments %></textarea>
+    </div>
+    <div class="form-item form-item-no-grow">
+        <label>Product image</label>
+        <input type="file" name="productImageFile" class="filepond">
+    </div>
 </div>
