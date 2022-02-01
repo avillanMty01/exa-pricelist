@@ -1,5 +1,9 @@
+<div  class="btn-row">
+    <a class="btn btn-primary" href="/categories/new">Add category</a>
+</div>
+
 <h2 class="page-header">Categories</h2>
-<a href="/categories/new">Add category</a>
+
 <br>
 <% categories.forEach( category => { %> 
     <div><a href="/categories/<%= category.id %>"><%= category.category %></a></div>

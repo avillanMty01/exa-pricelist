@@ -1,11 +1,11 @@
+<div class="btn-row">
+    <form action="/suppliers" method="GET">
+        <a class="btn btn-primary" href="/suppliers/new">Add supplier</a>
+        <input type="text" name="supplier" value="<%= searchOptions.supplier %>">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>
 <h2 class="page-header">Suppliers</h2>
-<form action="/suppliers" method="GET">
-    <label>Supplier</label>
-    <a href="/suppliers/new">Add supplier</a>
-    <input type="text" name="supplier" value="<%= searchOptions.supplier %>">
-    <button type="submit">Search</button>
-</form>
-<br>
 <% suppliers.forEach( supplier => { %> 
     <div><a href="/suppliers/<%= supplier.id %>"><%= supplier.supplier %></a></div>
 <% }) %> 

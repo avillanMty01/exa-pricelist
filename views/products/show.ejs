@@ -1,3 +1,8 @@
+<div  class="btn-row">
+    <a class="btn btn-primary" href="/products/<%= product.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', { url: `/products/${product.id}` }) %>
+</div>
+
 <h2 class="page-header"><%= product.sku %> - <%= product.product %> </h2>
 <div>
 price: <%= product.price %>
@@ -12,8 +17,3 @@ comments: <%= product.comments %>
 <% if (product.productImageFile != null && product.productImageFile !== '') { %>
     <div><img height="150" width="100" src="<%= product.productImageFile %>"></div>
 <% } %>
-
-<div>
-    <a class="btn btn-primary" href="/products/<%= product.id %>/edit">Edit</a>
-    <%- include('../partials/deleteForm', { url: `/products/${product.id}` }) %>
-</div>

@@ -1,3 +1,8 @@
+<div class="btn-row">
+    <a class="btn btn-primary" href="/categories/<%= category.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm', { url: `/categories/${category.id}` }) %>
+</div>
+
 <h2  class="page-header">Category: <%= category.category %> </h2>
 
     <label>c_ClaveProdServ *: <%= category.c_ClaveProdServ %></label>
@@ -5,7 +10,3 @@
     <label>catStatus: <%= category.catStatus %></label>
     <br>
     <label>createdBy: <%= category.createdBy %></label>
-<div class="btn-row">
-    <a class="btn btn-primary" href="/categories/<%= category.id %>/edit">Edit</a>
-    <%- include('../partials/deleteForm', { url: `/categories/${category.id}` }) %>
-</div>
