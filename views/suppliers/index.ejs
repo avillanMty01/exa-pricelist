@@ -1,9 +1,12 @@
-<div class="form-row form-row-end btn-row">
-    <form action="/suppliers" method="GET">
-        <a class="btn btn-primary" href="/suppliers/new">Add supplier</a>
+<form action="/suppliers" method="GET">
+    <div class="form-row form-row-end">
+        <a class="btn btn-primary" href="/suppliers/new">Add supplier</a>    
+    </div>
+    <div class="form-row form-row-end btn-row">
         <input type="text" name="supplier" value="<%= searchOptions.supplier %>">
         <button class="btn btn-primary" type="submit">Search</button>
-    </form>
+    </div>
+</form>
 </div>
 <h2 class="page-header">Suppliers</h2>
 <% suppliers.forEach( supplier => { %>
