@@ -5,6 +5,8 @@
 <h2 class="page-header">Categories</h2>
 
 <% categories.forEach( category => { %> 
-    <div><a href="/categories/<%= category.id %>"><%= category.category %></a></div>
-    <div><%= category.c_ClaveProdServ %> </div>
+    <div class="category-row category-name">
+        <a href="/categories/<%= category.id %>"><%= category.category %></a>
+        <%= category.c_ClaveProdServ %>
+    </div>
 <% }) %> 

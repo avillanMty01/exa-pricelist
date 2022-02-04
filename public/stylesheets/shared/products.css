@@ -1,0 +1,25 @@
+:root {
+    --product-image-width: 200px;
+    --product-image-width-large: 325px;
+    --product-image-aspect-ratio: 0.75;
+}
+
+.product-image {
+    width: var(--product-image-width);
+    height: calc(var(--product-image-width) / var(--product-image-aspect-ratio));
+}
+
+.product-image-large {
+    --product-image-width: var(var(--product-image-width-large))
+}
+
+.product-grid {
+    display: grid;
+    justify-content: center;
+    grid-gap: 2rem;
+    grid-template-columns: repeat(auto-fill, var(--product-image-width));
+}
+
+.product-grid-large {
+    grid-template-columns: repeat(auto-fill, var(--product-image-width-large));
+}

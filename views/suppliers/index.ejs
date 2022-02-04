@@ -6,6 +6,8 @@
     </form>
 </div>
 <h2 class="page-header">Suppliers</h2>
-<% suppliers.forEach( supplier => { %> 
-    <div><a href="/suppliers/<%= supplier.id %>"><%= supplier.supplier %></a></div>
+<% suppliers.forEach( supplier => { %>
+    <div class="category-row category-name">
+        <a href="/suppliers/<%= supplier.id %>"><%= supplier.supplier %></a>
+    </div>
 <% }) %> 

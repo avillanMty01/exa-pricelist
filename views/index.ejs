@@ -1,5 +1,4 @@
 <h2 class="page-header">Latest Products</h2>
-<div>
 <form action="/" method="GET">
     <div class="form-row">
         <div class="form-item"></div>
@@ -9,18 +8,14 @@
         </div>
         <button class="btn btn-primary" type="submit">Search</button>
     </div>
-        
 </form>
-<div>
 <% products.forEach( product => { %> 
-    <div><b><%= product.sku %></b></div>
-    <div><a href="/products/<%= product.id %>"><b><%= product.product %></b></a></div>
-    <%= new Intl.NumberFormat('en-US',  { style: 'currency', currency: 'USD' }).format(product.price) %>
-    <div><%= product.category.category %></div>
-    <% if (product.productImagePath != null && product.productImagePath !== '') { %>
-        <div><img height="150" width="100" src="<%= product.productImagePath %>"></div>
-    <% } %>
-    <br>
+    <div class="viewTable category-name">
+        <div><%= product.sku %></div>
+        <div><a href="/products/<%= product.id %>"><b><%= product.product %></b></a></div>
+        <div><%= new Intl.NumberFormat('en-US',  { style: 'currency', currency: 'USD' }).format(product.price) %></div>
+        <div><%= product.category.category %></div>
+    </div>
 <% }) %> 
 
 
