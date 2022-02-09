@@ -22,12 +22,15 @@
 
 .viewTable {
     display: grid;
+    grid-gap: 1rem;
     grid-template-columns: 10% 50% 20% 20%; 
 }
 
 .viewTable5 {
     display: grid;
-    grid-template-columns: 10% 40% 10% 20% 20%; 
+    grid-gap: 1rem;
+    grid-template-columns: 10% 40% 10% 20% 20%;
+
 }
 
 .table > div {

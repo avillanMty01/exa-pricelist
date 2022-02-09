@@ -20,15 +20,29 @@ body {
     background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
 }
 
-.container {
+/* .container {
     max-width: 1200px;
     margin: auto;
     margin-bottom: 3rem;
-}
+} */
 
-.inner-container {
-    margin: 0 2rem;
+.container {  display: grid;
+    grid-template-columns: 10% 90%;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "Navigator View"
+  }
+  
+  .Navigator { 
+    grid-area: Navigator;
 }
+  
+  .View { 
+    margin-block-start: 4rem ;
+    grid-area: View;
+}
+  
 
 .page-header {
     font-size: 2rem;
