@@ -1,6 +1,7 @@
 :root {
-    --nav-title-font-size: 1.5rem;
+    --nav-title-font-size: 2rem;
     --nav-title-font-weight: bold;
+    --nav-link-font-size: 1.7rem;
     --nav-link-font-weight: 300;
 }
 
@@ -20,18 +21,21 @@
 }
 
 .header-nav ul {
-    display: flex;
-    margin: 0;
+    display: list-item;
+    margin-block-start: 4rem;
     padding: 0;
 }
 
 .header-nav li {
+    font-size: var(--nav-link-font-size);
+    margin-top: 12px;
     list-style: none;
 }
 
 .header-nav li a {
     text-decoration: none;
     color: var(--color-text-light);
+    font-size: var(--nav-link-font-size);
     font-weight: var(--nav-link-font-weight);
     padding: 1rem;
 }

@@ -4,16 +4,27 @@
 </div>
 
 <h2 class="page-header"><%= product.sku %> - <%= product.product %> </h2>
-<div>
-price: <%= new Intl.NumberFormat('en-US',  { style: 'currency', currency: 'USD' }).format(product.price) %>
-<br>
-suplier: <%= product.supplier.supplier %>
-<br>
-category: <%= product.category.category %>
-<br>
-<div class="product-details-label-description">comments: <%= product.comments %></div>
-</div>
 
-<% if (product.productImageFile != null && product.productImageFile !== '') { %>
-    <div><img height="150" width="100" src="<%= product.productImageFile %>"></div>
-<% } %>
+<div class="product-details">
+    <div>
+        <% if (product.productImageFile != null && product.productImageFile !== '') { %>
+            <div><img height="210" width="140" src="<%= product.productImageFile %>"></div>
+        <% } %>
+    </div>
+
+    <div class="product-details-grid">
+        <div class="product-details-label">Price: </div>
+        <div><%= new Intl.NumberFormat('en-US',  { style: 'currency', currency: 'USD' }).format(product.price) %></div>
+        
+        <div class="product-details-label">Supplier: </div>
+        <div><%= product.supplier.supplier %></div>
+        
+        <div class="product-details-label">Category: </div>
+        <div><%= product.category.category %></div>
+        
+        <div class="product-details-label">Comments: </div>
+        <div class="product-details-label-description"><%= product.comments %></div>
+    </div>
+    
+
+</div>
